@@ -1,0 +1,11 @@
+{% if questions %}
+<ul>
+  {% for question in questions %}
+  <li><a href="{% url 'view_answers' question.id question.name.name %}">{{ question.title }}</a>{{ question.date }}<br>
+    <p>Asked By : {{ question.name.name }}</p>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No results found.</p>
+{% endif %}

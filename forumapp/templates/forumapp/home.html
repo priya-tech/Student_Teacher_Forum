@@ -1,0 +1,26 @@
+{% extends 'forumapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<button class="button" onclick="location.href='{% url 'view_home' name %}'"><b>Home</b></button>
+<button class="button" onclick="location.href='{% url 'user_login' %}'"><b>Login</b></button>
+<button class="button" onclick="location.href='{% url 'user_register' %}'"><b>Register</b></button><br>
+<div class="homebody">
+
+
+<h2><center>All Questions</center></h2><br>
+<button class="button" onclick="location.href='{% url 'ask_questions' name %}'"><b>Ask a question</b></button><br><br>
+<div class="row">
+	<div class="col-6 align-left" >
+		<form >
+		<i id="search-icon" class="fa fa-search" aria-hidden="true"></i>
+		<input id="user-input" name="user-input" class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search" style="width:50%;">
+		</form>
+	</div>
+
+ <div id="replaceable-content" class="col-6">
+		{% include 'forumapp/search-results-partial.html' %}
+	</div>
+</div>
+</div>
+{% endblock %}

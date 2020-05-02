@@ -1,0 +1,22 @@
+{% extends 'forumapp/base.html' %}
+{% block content %}
+<button onclick="location.href='{% url 'view_home' name %}'">Home</button><br>
+<div class="answers">
+<h4>All Comments</h4><br>
+{% if allcomments %}<ul>
+{% for i in allcomments %}
+<li><b>{{ i.comment }} </b><br><p>Commented by {{ i.name }}</p></li>
+{% endfor %}
+</ul>
+{% else %}
+<p>No comments yet.</p>
+{% endif %}
+</div>
+<h3>Give your comment</h3>
+<form action="{% url 'comment' id name qid %}" method="post">
+  {% csrf_token %}
+  Name: <input type="text" name="name" style="width:20%;" placeholder="your name"><br>
+  Enter Comment:<br><textarea name="comment" rows="8" cols="80"></textarea><br><br>
+  <input type="submit" value="submit comment"><br>
+</form>
+{% endblock %}

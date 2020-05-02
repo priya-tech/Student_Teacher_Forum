@@ -1,0 +1,84 @@
+{% extends 'forumapp/base.html' %}
+{% block content %}
+<div class="viewquestion">
+<h2>{{ ans.title }}</h2><br>
+<p>{{ ans.content }}</p><br>
+<p>{{ ans.date }}</p>
+<p>Asked by: {{ ans.name.name }}</p>
+</div><br>
+<br>
+<button class="open-button" onclick="openFormedit()">Edit Question</button>
+<button class="open-button" onclick="openFormdelete()">Delete Question</button>
+
+<div class="form-popup" id="myFormedit">
+  <form action="{% url 'check' name  'edit' ans.id %}" class="form-container" method="post">
+   {% csrf_token %}
+    <h1>Login</h1>
+
+    <label for="username"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="username" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+
+    <button type="submit" class="btn">Login</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </form>
+</div>
+<div class="form-popup" id="myFormdelete">
+  <form action="{% url 'check' name 'delete' ans.id %}" class="form-container" method="post">
+    {% csrf_token %}
+  <h1>Login</h1>
+
+    <label for="username"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="username" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+
+    <button type="submit" class="btn">Login</button>
+    <button type="button" class="btn cancel" onclick="closeFormdelete()">Close</button>
+  </form>
+</div>
+
+
+
+<div class="answers">
+<h4>All Answers</h4>
+{% if allanswers %}
+<ul>
+{% for i in allanswers %}
+<li>
+<p>{{ i.answer }}</p>
+<p>Answered By : {{ i.name }}</p><a href="{% url 'comment' i.id ans.name.name id %}">comment</a>
+</li>
+{% endfor %}
+</ul>
+{% else %}
+<p>No Answers Submitted.</p>
+{% endif %}
+</div><br>
+<h4>Post Your Answers</h4>
+<form action="{% url 'view_answers' ans.id name %}" method="post">
+  {% csrf_token %}
+  Name : <input type="text" name="name" value="{{name}}" style="width:30%;" placeholder="your name"><br>
+  Your Answer : <br>
+  <textarea name="answer" rows="8" cols="80"></textarea><br><br>
+  <input type="submit" value="Post Answer">
+</form>
+<script>
+function openFormedit() {
+  document.getElementById("myFormedit").style.display = "block";
+}
+function openFormdelete() {
+  document.getElementById("myFormdelete").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myFormedit").style.display = "none";
+}
+function closeFormdelete() {
+  document.getElementById("myFormdelete").style.display = "none";
+}
+</script>
+{% endblock %}

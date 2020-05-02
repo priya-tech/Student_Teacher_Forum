@@ -1,0 +1,16 @@
+{% extends 'forumapp/base.html' %}
+{% block content %}
+<form action="{% url 'edit_question' profilename 'submit' question.id %}" >
+  {% csrf_token %}
+  Name : <input type="text" name="name" value="{{ question.name.name }}"><br>
+  Title : <input type="text" name="title" value="{{ question.title}}"><br>
+  Content : <textarea rows="4" column="8" name="content">{{ question.content }}</textarea><br>
+  Date : <input type="date" name="date" value="<p>id='demo'</p>">
+   <input type="submit" value="Save">
+</form>
+<script>
+var d = new Date();
+document.getElementById("demo").innerHTML = d;
+</script>
+
+{% endblock %}

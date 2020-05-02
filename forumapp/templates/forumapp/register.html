@@ -1,0 +1,12 @@
+{% extends 'forumapp/base.html' %}
+{% block content %}
+<div class="signup">
+  <h2>Register</h2>
+<form action="{% url 'user_register' %}" method="post">
+  {% csrf_token %}
+  {{form}}
+  <input type="submit" class="register" value="REGISTER">
+  <p>Already have an account <a href="{% url 'user_login' %}">Sign in</a></p>
+</form>
+</div>
+{% endblock %}

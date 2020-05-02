@@ -1,0 +1,15 @@
+{% extends 'forumapp/base.html' %}
+{% block content %}
+<div class="login">
+  <h2>Login</h2>
+<form action="{% url 'user_login' %}" method="post">
+  {% csrf_token %}
+  <b>Username :</b><br>
+  <input type="text" name="username" placeholder="Enter Username"><br>
+  <b>Password :</b><br>
+  <input type="password" name="password" placeholder="Enter Password"><br>
+  <input type="submit" class="register" value="LOGIN"><br>
+  <p>If you are a new user <a href="{% url 'user_register' %}">SignUp</a></p>
+</form>
+</div>
+{% endblock %}

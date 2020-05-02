@@ -1,0 +1,11 @@
+{% extends 'forumapp/base.html' %}
+{% block content %}
+<h3>Ask your issues</h3><br>
+<form action="{% url 'ask_questions' profilename %}" method="post">
+  {% csrf_token %}
+Name:<input type="text" name="name" value="{{name}}">  <br>
+Title:<input type="text" name="title" ><br>
+Content:<br><textarea name="content" rows="8" cols="120"></textarea><br><br>
+  <input type="submit" value="POST QUESTIONS"><br>
+</form>
+{% endblock %}
